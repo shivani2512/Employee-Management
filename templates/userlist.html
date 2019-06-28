@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body_block %}
+    <div class="container">
+        <div class="jumbotron">
+            <h3>List of users : </h3>
+            <ul>
+            {% for usr in user %}
+                {% if not usr.user.is_admin and not usr.user.is_employee %}
+                    <li><a href="{% url 'emp:detail' usr.id %}">{{usr.Name}}</a></li>
+
+                {% endif %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

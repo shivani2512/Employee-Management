@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body_block %}
+    <div class="container">
+        <div class="jumbotron">
+
+            {% if user.is_admin %}
+                <h5> Click here to see employee/user list:</h5>
+                <a class="btn btn-primary" href="{% url 'emp:emplist' %}">Employees</a>
+                <a class="btn btn-primary" href="{% url 'emp:userlist' %}">Users</a>
+            {% elif user.is_employee %}
+                <h3> Employee {{user.user.Name}}</h3>
+                <a class="btn btn-primary" href="{% url 'emp:detail' user.user.id %}">View Detail</a>
+
+            {% elif not user.is_authenticated %}
+                <h3>Register or Login to use our service...!</h3>
+            {% else %}
+                <h3> User {{ user.user.Name }}</h3><br>
+                <a class="btn btn-primary" href="{% url 'emp:detail' user.user.id %}">View Detail</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+

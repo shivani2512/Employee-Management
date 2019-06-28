@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block body_block %}
+    <div class="container">
+        <div class="jumbotron">
+            <table>
+                <tr>
+                    <td colspan="2">
+                        {% if user.Image %}
+                            <img src="{{ user.Image.url }}" width="250px" />
+                        {% endif %}
+                        <br><br>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Name : </td>
+                    <td>{{ user.Name }} </td>
+                </tr>
+                <tr>
+                    <td>Address : </td>
+                    <td>{{ user.Address }} </td>
+                </tr>
+                <tr>
+                    <td>Contact Number  : </td>
+                    <td>{{ user.Contact }} </td>
+                </tr>
+                <tr>
+                    {% if user.Joining_date %}
+                        <td>Joining Date : </td>
+                        <td>{{ user.Joining_date|date:"d/m/Y" }} </td>
+                    {% endif %}
+                </tr>
+            </table><br>
+        </div>
+
+        {% if request.user.is_employee %}
+            <a class="btn btn-primary" href="{% url 'emp:update' user.id %}">Update</a>
+        {% elif request.user.is_admin %}
+            <a href="{% url 'emp:emp' pk=user.id %}" class="btn btn-primary">Add Employee</a>
+            <a class="btn btn-primary" href="{% url 'emp:update' user.id %}">Update</a>
+            <a href="{% url 'emp:dltemp' pk=user.id %}" class="btn btn-primary">Delete Employee</a>
+        {% endif %}
+    </div>
+{% endblock %}
+

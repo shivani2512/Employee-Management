@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block body_block %}
+    <div class="container">
+        <div class="jumbotron">
+            <h4>{{user.Name}} is employee now became employee.</h4><br>
+            <h4>
+                Click here to see all <a href="{% url 'emp:emplist' %}">employee</a> list
+            </h4>
+        </div>
+    </div>
+{% endblock %}
